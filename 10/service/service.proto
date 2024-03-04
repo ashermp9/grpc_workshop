@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package filetransfer;
+
+option go_package = "./;filetransfer";
+
+service FileService {
+  rpc DownloadFile(FileRequest) returns (stream FileChunk);
+}
+
+message FileRequest {
+  string filename = 1;
+}
+
+message FileChunk {
+  bytes content = 1;
+  int32 progress = 2; // Progress as a percentage
+}
+
